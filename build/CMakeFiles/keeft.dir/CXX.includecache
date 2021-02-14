@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/muala/projects/keeft/libkeeft.cpp
+libkeeft.hpp
+/home/muala/projects/keeft/libkeeft.hpp
+
+/home/muala/projects/keeft/libkeeft.hpp
+iostream
+-
+vector
+-
+sys/socket.h
+-
+sys/types.h
+-
+netdb.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+ifaddrs.h
+-
+
+/home/muala/projects/keeft/main.cpp
+iostream
+-
+libkeeft.hpp
+/home/muala/projects/keeft/libkeeft.hpp
+

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -rdynamic CMakeFiles/keeft.dir/main.cpp.o CMakeFiles/keeft.dir/libkeeft.cpp.o -o keeft 

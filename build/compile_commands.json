@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/muala/projects/keeft/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/main.cpp.o -c /home/muala/projects/keeft/main.cpp",
+  "file": "/home/muala/projects/keeft/main.cpp"
+},
+{
+  "directory": "/home/muala/projects/keeft/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/libkeeft.cpp.o -c /home/muala/projects/keeft/libkeeft.cpp",
+  "file": "/home/muala/projects/keeft/libkeeft.cpp"
+}
+]
