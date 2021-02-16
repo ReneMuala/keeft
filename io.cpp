@@ -30,9 +30,11 @@ bool
     opt_list_IPv6   (true),
     opt_get_port        (false),
     opt_get_key         (true),
+    opt_print_help      (false),
+    opt_print_ver       (false),
     opt_print_config    (false);
 
-    
+std::unordered_map<std::string, std::string> command_options;
     
 void reset_get_opts(){
     opt_get_IPv4 =
@@ -42,8 +44,15 @@ void reset_get_opts(){
     opt_get_port = false;
 }
 
+void log(const char* message)
+{
+    printf("[log]:\t%s", message);
+}
+
 bool handle_opt(in_option option){
     switch(option){
+        case _H: opt_print_help = true; break;
+        case _V: opt_print_ver  = true; break;
         case _R: on_receiver_mode = true; break;
         case _S: on_receiver_mode = false;
                  opt_get_filename = true; return true;
@@ -55,12 +64,14 @@ bool handle_opt(in_option option){
         case _P: opt_get_port = true; return true;
         case _K: opt_get_key = true; return true;
         case _C: opt_print_config = true; break;
-        default: keeft::perror("Invalid sintax (_NULL in_option), see HowToUse.mid");
+        default: keeft::perror("Invalid sintax (_NULL in_option), see keeft -H");
     } return false;
 }
   
 in_option convert_str_to_option(const char * str){
-    if (str[1] == 'R') return _R;
+    if (str[1] == 'H') return _H;
+    else if (str[1] == 'V') return _V;
+    else if (str[1] == 'R') return _R;
     else if (str[1] == 'S') return _S;
     else if (str[1] == 'L') return _L;
     else if (str[1] == 'P') return _P;
@@ -100,11 +111,12 @@ void parse_args(int argc, char **argv){
 }
 
 void print_config(){
-    std::cout << "Landia-keeft (" << keeft::version << ")" << std::endl
+    print_version();
+    std::cout 
     << "*\tmode: " << ((on_receiver_mode) ? "on_receiver_mode" : "on_sender_mode") << std::endl 
     << "*\tfilename: " << param_filename << std::endl
     << "*\tIPv4: " << param_IPv4 << std::endl 
-    << "*\tIPv6: " << param_IPv6 << "(unused for connection)" << std::endl
+    << "*\tIPv6: " << param_IPv6 << "(unused)" << std::endl
     << "*\tKey: " << param_key << std::endl;
 }
 
@@ -115,8 +127,33 @@ void print_addresses(std::vector<std::string> addresses, const char * type){
 
 void list_machine_addresses(bool print_v4s, bool print_v6s) {
     std::vector<std::string> addresses;
-    if(print_v4s)  print_addresses(get_machine_IPv4_addrs(), "IPv4");
-    if(print_v6s)  print_addresses(get_machine_IPv6_addrs(), "IPv6");
+    if(print_v4s) print_addresses(get_machine_IPv4_addrs(), "IPv4");
+    if(print_v6s) print_addresses(get_machine_IPv6_addrs(), "IPv6");
+}
+
+void print_version() {
+    std::cout << "Landia::Keeft " << version << std::endl; 
+}
+
+
+void load_command_options() {
+    command_options["-H"]="to print this glossary.";
+    command_options["-R"]="Enables receiver mode.";
+    command_options["-S <File>"] = "Enables sender mode indicating the file to be sent.";
+    command_options["--IPv4 <Address>"] = "[param for  -S] Specifies the IPv4 address of the receiver.";
+    command_options["--IPv6 <Address>"] = "[param for  -S] Specifies the IPv6 address of the receiver.";
+    command_options["-L"]="Lists all avaliable addresses.";
+    command_options["--only-IPv4"]="[param for  -L] List only IPv4 addresses.";
+    command_options["--only-IPv6"]="[param for  -L] List only IPv6 addresses.";
+    command_options["-P <Port>"]="Specifies the port to be used.";
+    command_options["-K <Password>"]="Specifies a Password.";
+    command_options["-C"]="Prints the current keeft config.";
+}
+
+void print_command_options() {
+     for(auto option : command_options){
+         std::cout << option.first << "\t: " << option.second << std::endl;
+    }
 }
 
 }

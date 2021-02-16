@@ -26,11 +26,11 @@ void set_default_key(){
 }
 
 void set_default_port(){
-    param_port = 9000;
+    param_port = htons(9000);
 }
 
 void set_default_address(){
-    strcpy(param_IPv4, "127.0.0.1");
+    strcpy(param_IPv4, keeft::get_machine_IPv4_addrs()[0].data());
 }
 
 void set_defaults(){
@@ -51,8 +51,8 @@ bool configure_server(int port)
 {
      configure_sock_addr(server_addr, port);
      if(bind(main_sock, (sockaddr*)&server_addr, sizeof(server_addr)) < 0)
-        perror("unable to bind main_sock at configure_server, try another port.");
-     return false;
+        return false;
+     return true;
 }
 
 bool configure_client(const char * address, int port)

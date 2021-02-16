@@ -1,7 +1,0 @@
-/home/muala/projects/keeft/build/CMakeFiles/install/strip.dir
-/home/muala/projects/keeft/build/CMakeFiles/install/local.dir
-/home/muala/projects/keeft/build/CMakeFiles/install.dir
-/home/muala/projects/keeft/build/CMakeFiles/list_install_components.dir
-/home/muala/projects/keeft/build/CMakeFiles/rebuild_cache.dir
-/home/muala/projects/keeft/build/CMakeFiles/edit_cache.dir
-/home/muala/projects/keeft/build/CMakeFiles/keeft.dir

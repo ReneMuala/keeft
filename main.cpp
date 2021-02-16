@@ -8,9 +8,10 @@
  */
 
 #include <iostream>
-#include "net.hpp"
 #include "config.hpp"
 #include "io.hpp"
+#include "net.hpp"
+
 
 namespace keeft 
 {
@@ -40,16 +41,20 @@ extern bool
     opt_list_IPv6   ,
     opt_get_port    ,
     opt_get_key     ,
+    opt_print_help  ,
+    opt_print_ver   ,
     opt_print_config;
-
+    
 } // namespace keeft
 
 using namespace keeft;
 
 int main(int argc, char **argv) {
-   
+    
+    load_command_options();
+    
     if(argc < 2)
-        keeft::perror("Invalid sintax, see HowToUse.md");
+        keeft::perror("Invalid sintax, see keeft -H");
     
     init();
     
@@ -57,38 +62,15 @@ int main(int argc, char **argv) {
     
     parse_args(argc, argv);
     
-    if(on_list_mode) list_machine_addresses(opt_list_IPv4, opt_list_IPv6);
-    
-    if(opt_print_config) print_config();
-    
-    if(on_receiver_mode){
-        configure_server(param_port);
-        if(wait_for_client()){
-            if(verify_password(param_key)){
-                get_file_specs(param_filename, param_filesize);  
-                if((current_file = fopen(param_filename, "w"))){
-                    if(keeft::receive_file(current_file, param_filesize))
-                        std::cout << "file: " << param_filename << " (" << param_filesize << "bytes) received" << std::endl;
-                }
-            } else keeft::perror("Wrong password from sender");
-        }
+    if(on_list_mode)            list_machine_addresses(opt_list_IPv4, opt_list_IPv6);
+    else if(opt_print_config)   print_config();
+    else if(opt_print_ver)      print_version();
+    else if(opt_print_help)     print_command_options();
+    else if(on_receiver_mode){
+        receive::receive();
     } else {
-        if((current_file = fopen(param_filename, "r"))){
-            ignore_path_in_filename(param_filename);
-            param_filesize = get_file_size(current_file);
-            std::cout << "filename: " << param_filename << "\tsize: " << param_filesize;
-            if(configure_client(param_IPv4, param_port)){
-                if(connect_to_server()){
-                    if(send_password(param_key)){
-                        send_file_specs(param_filename, param_filesize);
-                        send_file(current_file);
-                    } else keeft::perror("Wrong password"); 
-                }
-            }
-        }
-    }
-    
-    end();
+        send::send();
+    } end();
    
     return 0;
 }

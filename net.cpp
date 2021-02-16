@@ -41,11 +41,6 @@ bool init()
     return true;
 }
 
-void log(const char* message)
-{
-    printf("[log]:\t%s\n", message);
-}
-
 bool wait_for_client()
 {
     if(listen(main_sock, 5) < 0)
@@ -59,10 +54,10 @@ bool verify_password(const char* key)
     char received_key [keeft_key_len];
     recv(file_sock, received_key,keeft_key_len,0);
     if(!strlen(key) or strcmp(key, received_key) == 0){
-        send(file_sock, "1", 1, 0);
+        ::send(file_sock, "1", 1, 0);
         return true;
     } else {
-        send(file_sock, "0", 1, 0);
+        ::send(file_sock, "0", 1, 0);
         return false;
     }
 }
@@ -84,10 +79,9 @@ bool receive_file(FILE*  file, size_t size)
     if(!size) return true;
     while(received_size < size){
         recv(file_sock, &buffer, sizeof(buffer),0);
-        piece_size = 1;
-        received_size += piece_size;
+        piece_size = 1; received_size += piece_size;
         if(!piece_size)
-            perror("Unexpected EOF");
+            return false;
         fwrite(&buffer, sizeof(buffer), piece_size, file);
         buffer = 0;
     } return true;
@@ -121,7 +115,7 @@ bool connect_to_server()
 bool send_password(const char* password)
 {
     char feedback[2];
-    send(main_sock, password, keeft_key_len, 0);
+    ::send(main_sock, password, keeft_key_len, 0);
     recv(main_sock, feedback, 2, 0);
     return feedback[0] == '1';
 }
@@ -129,8 +123,8 @@ bool send_password(const char* password)
 bool send_file_specs(const char* filename, size_t filesize)
 {
     return 
-    send(main_sock, filename, keeft_filename_len, 0) and 
-    send(main_sock, &filesize, sizeof(filesize), 0);
+    ::send(main_sock, filename, keeft_filename_len, 0) and 
+    ::send(main_sock, &filesize, sizeof(filesize), 0);
 }
 
 bool send_file(FILE*file)
@@ -139,7 +133,7 @@ bool send_file(FILE*file)
     int buffer;
     while(!feof(file)){
         fread(&buffer, sizeof(buffer), 0x1, file);
-        send(main_sock, &buffer, sizeof(buffer), 0);
+        ::send(main_sock, &buffer, sizeof(buffer), 0);
         buffer = 0;
     } return true;
 }
