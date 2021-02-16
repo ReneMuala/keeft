@@ -66,11 +66,9 @@ int main(int argc, char **argv) {
     else if(opt_print_config)   print_config();
     else if(opt_print_ver)      print_version();
     else if(opt_print_help)     print_command_options();
-    else if(on_receiver_mode){
-        receive::receive();
-    } else {
-        send::send();
-    } end();
+    else if(on_receiver_mode)   receive::receive();
+    else                        send::send();
+    end();
    
     return 0;
 }
