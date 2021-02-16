@@ -89,32 +89,62 @@ CMakeFiles/keeft.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keeft.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/muala/projects/keeft/main.cpp -o CMakeFiles/keeft.dir/main.cpp.s
 
-CMakeFiles/keeft.dir/libkeeft.cpp.o: CMakeFiles/keeft.dir/flags.make
-CMakeFiles/keeft.dir/libkeeft.cpp.o: ../libkeeft.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/keeft.dir/libkeeft.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keeft.dir/libkeeft.cpp.o -c /home/muala/projects/keeft/libkeeft.cpp
+CMakeFiles/keeft.dir/net.cpp.o: CMakeFiles/keeft.dir/flags.make
+CMakeFiles/keeft.dir/net.cpp.o: ../net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/keeft.dir/net.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keeft.dir/net.cpp.o -c /home/muala/projects/keeft/net.cpp
 
-CMakeFiles/keeft.dir/libkeeft.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/keeft.dir/libkeeft.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/muala/projects/keeft/libkeeft.cpp > CMakeFiles/keeft.dir/libkeeft.cpp.i
+CMakeFiles/keeft.dir/net.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/keeft.dir/net.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/muala/projects/keeft/net.cpp > CMakeFiles/keeft.dir/net.cpp.i
 
-CMakeFiles/keeft.dir/libkeeft.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keeft.dir/libkeeft.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/muala/projects/keeft/libkeeft.cpp -o CMakeFiles/keeft.dir/libkeeft.cpp.s
+CMakeFiles/keeft.dir/net.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keeft.dir/net.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/muala/projects/keeft/net.cpp -o CMakeFiles/keeft.dir/net.cpp.s
+
+CMakeFiles/keeft.dir/io.cpp.o: CMakeFiles/keeft.dir/flags.make
+CMakeFiles/keeft.dir/io.cpp.o: ../io.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/keeft.dir/io.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keeft.dir/io.cpp.o -c /home/muala/projects/keeft/io.cpp
+
+CMakeFiles/keeft.dir/io.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/keeft.dir/io.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/muala/projects/keeft/io.cpp > CMakeFiles/keeft.dir/io.cpp.i
+
+CMakeFiles/keeft.dir/io.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keeft.dir/io.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/muala/projects/keeft/io.cpp -o CMakeFiles/keeft.dir/io.cpp.s
+
+CMakeFiles/keeft.dir/config.cpp.o: CMakeFiles/keeft.dir/flags.make
+CMakeFiles/keeft.dir/config.cpp.o: ../config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/keeft.dir/config.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/keeft.dir/config.cpp.o -c /home/muala/projects/keeft/config.cpp
+
+CMakeFiles/keeft.dir/config.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/keeft.dir/config.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/muala/projects/keeft/config.cpp > CMakeFiles/keeft.dir/config.cpp.i
+
+CMakeFiles/keeft.dir/config.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/keeft.dir/config.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/muala/projects/keeft/config.cpp -o CMakeFiles/keeft.dir/config.cpp.s
 
 # Object files for target keeft
 keeft_OBJECTS = \
 "CMakeFiles/keeft.dir/main.cpp.o" \
-"CMakeFiles/keeft.dir/libkeeft.cpp.o"
+"CMakeFiles/keeft.dir/net.cpp.o" \
+"CMakeFiles/keeft.dir/io.cpp.o" \
+"CMakeFiles/keeft.dir/config.cpp.o"
 
 # External object files for target keeft
 keeft_EXTERNAL_OBJECTS =
 
 keeft: CMakeFiles/keeft.dir/main.cpp.o
-keeft: CMakeFiles/keeft.dir/libkeeft.cpp.o
+keeft: CMakeFiles/keeft.dir/net.cpp.o
+keeft: CMakeFiles/keeft.dir/io.cpp.o
+keeft: CMakeFiles/keeft.dir/config.cpp.o
 keeft: CMakeFiles/keeft.dir/build.make
 keeft: CMakeFiles/keeft.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable keeft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/muala/projects/keeft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable keeft"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/keeft.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

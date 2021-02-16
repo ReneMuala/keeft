@@ -6,7 +6,17 @@
 },
 {
   "directory": "/home/muala/projects/keeft/build",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/libkeeft.cpp.o -c /home/muala/projects/keeft/libkeeft.cpp",
-  "file": "/home/muala/projects/keeft/libkeeft.cpp"
+  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/net.cpp.o -c /home/muala/projects/keeft/net.cpp",
+  "file": "/home/muala/projects/keeft/net.cpp"
+},
+{
+  "directory": "/home/muala/projects/keeft/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/io.cpp.o -c /home/muala/projects/keeft/io.cpp",
+  "file": "/home/muala/projects/keeft/io.cpp"
+},
+{
+  "directory": "/home/muala/projects/keeft/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/keeft.dir/config.cpp.o -c /home/muala/projects/keeft/config.cpp",
+  "file": "/home/muala/projects/keeft/config.cpp"
 }
 ]
