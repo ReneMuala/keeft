@@ -1,11 +1,14 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include "config.hpp"
 
 namespace keeft {
     typedef enum 
-        { _R, _S, __IPv4, __IPv6, _L, __only_IPv4, __only_IPv6, _P, _K, _C, _NULL } in_option;
+        { _H, _V, _R, _S, __IPv4, __IPv6, _L, __only_IPv4, __only_IPv6, _P, _K, _C, _NULL } in_option;
     
+    void log(const char * );
     void reset_get_opts();
     bool handle_opt(in_option option);
     ;; in_option convert_str_to_option(const char * str);
@@ -14,5 +17,10 @@ namespace keeft {
     void print_config();
     void print_addresses(std::vector<std::string> addresses, const char * type);
     void list_machine_addresses(bool print_v4s, bool print_v6s);
+    
+    void print_version();
+    
+    void load_command_options();
+    void print_command_options();
     
 }

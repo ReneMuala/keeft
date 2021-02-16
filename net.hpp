@@ -24,18 +24,17 @@
 #define keeft_sock_len 0x50B4
 
 namespace keeft {
-    static double version = 0.1;
     int create_stream_tcpip_socket();
     void perror(const char *);
     bool init();
-    void log(const char * );
-    ;;
+    /* server */
     bool wait_for_client();
     bool verify_password(const char *);
     bool get_file_specs(char *, size_t &);
     bool receive_file(FILE *, size_t);
     ;; void ignore_path_in_filename(char *);
     ;; size_t get_file_size(FILE*);
+    /* client */
     bool connect_to_server();
     bool send_password(const char *);
     bool send_file_specs(const char *, size_t);
@@ -46,4 +45,22 @@ namespace keeft {
     std::vector<std::string> get_machine_IPv6_addrs();
     std::string get_current_name(size_t = 1024);
     int get_current_port();
+    /* receive */
+    namespace receive
+    {
+        void receive();
+        void wait();
+        void verify();
+        void receive_file();   
+    }
+    namespace send 
+    {
+        void send();
+        void open_file();
+        void configure();
+        void connect();
+        void send_password();
+        void send_file();
+    }
+    /* send */
 };
