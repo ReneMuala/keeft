@@ -15,7 +15,7 @@ _Receive a file from an keeft sender:_
 
 > keeft -R
 
-## There are some keeft options:
+## Here are some keeft options 📋:
 
 ##### -H 
 To get a list of all keeft options with their descriptions.
@@ -43,6 +43,4 @@ _setting a key on receiver_
 _setting a key on sender_
 
 > keeft -S helloworld.txt -K bananas21
-
-
 
