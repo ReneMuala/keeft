@@ -1,3 +1,8 @@
+/*  KEEFT - TCP/IP FILE TRANSFER TOOL
+ *  © Landia (Rene Muala)
+ *
+ */
+
 #include "config.hpp"
 #include "net.hpp"
 
@@ -11,6 +16,10 @@ char
     
 uint16_t
     param_port;
+
+size_t 
+    param_filesize,
+    param_buffsize;
     
 extern int 
     main_sock;
@@ -33,10 +42,15 @@ void set_default_address(){
     strcpy(param_IPv4, keeft::get_machine_IPv4_addrs()[0].data());
 }
 
+void set_default_buff_size (){
+    param_buffsize = 10240;
+}
+
 void set_defaults(){
     set_default_key();
     set_default_port();
     set_default_address();
+    set_default_buff_size();
 }
 
 void configure_sock_addr(sockaddr_in & addr , int port)

@@ -1,3 +1,8 @@
+/*  KEEFT - TCP/IP FILE TRANSFER TOOL
+ *  © Landia (Rene Muala)
+ *
+ */
+
 #include "net.hpp"
 #include "config.hpp"
 
@@ -13,7 +18,8 @@ extern uint16_t
     param_port;
     
 extern size_t 
-    param_filesize;
+    param_filesize,
+    param_buffsize;
     
 extern FILE *
     current_file;
@@ -36,7 +42,10 @@ extern bool
     {
         void send_file(){
             send_file_specs(param_filename, param_filesize);
-            keeft::send_file(current_file);
+            if(keeft::send_file(current_file, param_filesize, param_buffsize))
+                std::cout << "file: " << param_filename << " (" << param_filesize << "bytes) sent" << std::endl;
+            else 
+                keeft::perror("Unexpected EOF");
         }
         void send_password(){
             if(keeft::send_password(param_key)){
@@ -54,8 +63,7 @@ extern bool
         
         void configure(){
             ignore_path_in_filename(param_filename);
-            param_filesize = get_file_size(current_file);
-            std::cout << "filename: " << param_filename << "\t (" << param_filesize << "bytes)"<< std::endl;
+            param_filesize = get_file_size(current_file, param_buffsize);
             if(configure_client(param_IPv4, param_port)){
                 connect();
             } else 

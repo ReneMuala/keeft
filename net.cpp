@@ -1,15 +1,15 @@
 /*  KEEFT - TCP/IP FILE TRANSFER TOOL
  *  © Landia (Rene Muala)
- *  
- *  Usage: 
- * 
- *  See HowToUse.md
  *
  */
 
-#include "net.hpp"
 
-namespace keeft{
+#include "net.hpp"
+#include "io.hpp"
+
+namespace keeft
+{
+    
 int 
     main_sock,
     file_sock;
@@ -22,6 +22,9 @@ sockaddr_in
     
 socklen_t 
     server_addr_len;
+    
+extern size_t 
+    param_buffsize;
 
 int create_stream_tcpip_socket()
 {
@@ -69,21 +72,22 @@ bool get_file_specs(char* filename, size_t& filesize)
     recv(file_sock, &filesize, sizeof(filesize), 0);
 }
 
-bool receive_file(FILE*  file, size_t size)
+bool receive_file(FILE*  file, size_t size, size_t buf_size)
 {
     ::fseek(file, 0, SEEK_SET);
-    int buffer;
-    size_t 
-        piece_size = 0, 
+    int buffer[buf_size];
+    size_t
+        piece_size = 0,
         received_size = 0;
     if(!size) return true;
+    printf("-----------received");
     while(received_size < size){
-        recv(file_sock, &buffer, sizeof(buffer),0);
-        piece_size = 1; received_size += piece_size;
-        if(!piece_size)
-            return false;
-        fwrite(&buffer, sizeof(buffer), piece_size, file);
-        buffer = 0;
+        piece_size = recv(file_sock, &buffer, buf_size,0);
+        received_size += piece_size;
+        if(!piece_size)            return false;
+        print_progress(received_size, size);
+        fwrite(&buffer, 1, piece_size, file);
+        bzero(buffer, buf_size);
     } return true;
 }
 
@@ -96,15 +100,18 @@ void ignore_path_in_filename(char*filename)
     strcpy(filename, filename_str.substr(init_pos, filename_str.length() - init_pos).data());
 }
 
-size_t get_file_size(FILE* file)
+size_t get_file_size(FILE* file, size_t buff_size)
 {
+    printf("-analyzing-file...");
+        setbuf(stdout, NULL);
     ::fseek(file, 0, SEEK_SET);
     size_t size = 0;
-    char buffer[255];
+    char buffer[buff_size];
     while (!feof(file)){
-        size += fread(buffer, 1, 255, file);
-        bzero(buffer, 255);
-    } return size;
+        size += fread(buffer, 1, buff_size, file);
+        bzero(buffer, buff_size);
+    } printf("\r                   \r");
+    return size;
 }
 
 bool connect_to_server()
@@ -127,14 +134,19 @@ bool send_file_specs(const char* filename, size_t filesize)
     ::send(main_sock, &filesize, sizeof(filesize), 0);
 }
 
-bool send_file(FILE*file)
+bool send_file(FILE*file , size_t size , size_t buff_size)
 {
     ::fseek(file, 0, SEEK_SET);
-    int buffer;
-    while(!feof(file)){
-        fread(&buffer, sizeof(buffer), 0x1, file);
-        ::send(main_sock, &buffer, sizeof(buffer), 0);
-        buffer = 0;
+    char buffer[buff_size];
+    size_t piece_size = 0, sent_size = 0;
+    printf("-----------sent");
+    while(!feof(file) and sent_size < size){
+        piece_size = fread(&buffer, 1, buff_size, file);
+        sent_size += piece_size;
+        print_progress(sent_size, size); 
+        ::send(main_sock, &buffer, piece_size, 0);
+        if(!piece_size) return false;
+        bzero(buffer, buff_size);
     } return true;
 }
 

@@ -1,3 +1,8 @@
+/*  KEEFT - TCP/IP FILE TRANSFER TOOL
+ *  © Landia (Rene Muala)
+ *
+ */
+
 #include "net.hpp"
 #include "config.hpp"
 #include "io.hpp"
@@ -15,7 +20,8 @@ extern uint16_t
     param_port;
     
 extern size_t 
-    param_filesize;
+    param_filesize,
+    param_buffsize;
     
 extern FILE *
     current_file;
@@ -40,7 +46,7 @@ extern bool
         void receive_file(){
             get_file_specs(param_filename, param_filesize);  
             if((current_file = fopen(param_filename, "w"))){
-                if(keeft::receive_file(current_file, param_filesize))
+                if(keeft::receive_file(current_file, param_filesize, param_buffsize))
                     std::cout << "file: " << param_filename << " (" << param_filesize << "bytes) received" << std::endl;
                 else 
                     keeft::perror("Unexpected EOF");

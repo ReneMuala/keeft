@@ -1,3 +1,8 @@
+/*  KEEFT - TCP/IP FILE TRANSFER TOOL
+ *  © Landia (Rene Muala)
+ *
+ */
+
 #pragma once
 #include <string>
 #include <vector>
@@ -6,7 +11,7 @@
 
 namespace keeft {
     typedef enum 
-        { _H, _V, _R, _S, __IPv4, __IPv6, _L, __only_IPv4, __only_IPv6, _P, _K, _C, _NULL } in_option;
+        { _H, _V,_B, _R, _S, __IPv4, __IPv6, _L, __only_IPv4, __only_IPv6, _P, _K, _C, _NULL } in_option;
     
     void log(const char * );
     void reset_get_opts();
@@ -17,6 +22,8 @@ namespace keeft {
     void print_config();
     void print_addresses(std::vector<std::string> addresses, const char * type);
     void list_machine_addresses(bool print_v4s, bool print_v6s);
+    
+    void print_progress(double, double);
     
     void print_version();
     

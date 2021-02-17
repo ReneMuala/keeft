@@ -1,9 +1,5 @@
 /*  KEEFT - TCP/IP FILE TRANSFER TOOL
  *  © Landia (Rene Muala)
- *  
- *  Usage: 
- * 
- *  See HowToUse.md
  *
  */
 

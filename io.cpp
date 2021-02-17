@@ -1,3 +1,8 @@
+/*  KEEFT - TCP/IP FILE TRANSFER TOOL
+ *  © Landia (Rene Muala)
+ *
+ */
+
 #include "io.hpp"
 #include <sys/types.h>
 #include "net.hpp"
@@ -14,8 +19,8 @@ extern char
 extern uint16_t
     param_port;
     
-size_t 
-    param_filesize;
+extern size_t 
+    param_buffsize;
     
 FILE *
     current_file;
@@ -29,7 +34,8 @@ bool
     opt_list_IPv4   (true),
     opt_list_IPv6   (true),
     opt_get_port        (false),
-    opt_get_key         (true),
+    opt_get_key         (false),
+    opt_get_buffsize    (false),
     opt_print_help      (false),
     opt_print_ver       (false),
     opt_print_config    (false);
@@ -54,6 +60,7 @@ bool handle_opt(in_option option){
         case _H: opt_print_help = true; break;
         case _V: opt_print_ver  = true; break;
         case _R: on_receiver_mode = true; break;
+        case _B: opt_get_buffsize = true; return true;
         case _S: on_receiver_mode = false;
                  opt_get_filename = true; return true;
         case __IPv4: opt_get_IPv4 = true; return true;
@@ -71,6 +78,7 @@ bool handle_opt(in_option option){
 in_option convert_str_to_option(const char * str){
     if (str[1] == 'H') return _H;
     else if (str[1] == 'V') return _V;
+    else if (str[1] == 'B') return _B;
     else if (str[1] == 'R') return _R;
     else if (str[1] == 'S') return _S;
     else if (str[1] == 'L') return _L;
@@ -86,6 +94,7 @@ in_option convert_str_to_option(const char * str){
 
 void get_value(const char * value){
     if (opt_get_filename) strcpy(param_filename, value);
+    else if (opt_get_buffsize) param_buffsize  = atoll(value);
     else if (opt_get_IPv4) strcpy(param_IPv4, value);
     else if (opt_get_IPv6) strcpy(param_IPv6, value);
     else if (opt_get_port) param_port = htons(atoi(value));
@@ -115,6 +124,7 @@ void print_config(){
     std::cout 
     << "*\tmode: " << ((on_receiver_mode) ? "on_receiver_mode" : "on_sender_mode") << std::endl 
     << "*\tfilename: " << param_filename << std::endl
+    << "*\tbuffsize: " << param_buffsize << std::endl 
     << "*\tIPv4: " << param_IPv4 << std::endl 
     << "*\tIPv6: " << param_IPv6 << "(unused)" << std::endl
     << "*\tKey: " << param_key << std::endl;
@@ -131,15 +141,27 @@ void list_machine_addresses(bool print_v4s, bool print_v6s) {
     if(print_v6s) print_addresses(get_machine_IPv6_addrs(), "IPv6");
 }
 
+void print_progress(double done, double total){
+    char str [10];
+    static int last_pos = 0;
+    int current_pos = (done/total)*100;
+    if(current_pos > last_pos){
+        sprintf(str,"%3d%% ", current_pos);
+            printf("\r%10s", str);
+            setbuf(stdout, NULL);
+        last_pos = current_pos;
+    }
+}
+
 void print_version() {
     std::cout << "Landia::Keeft " << version << std::endl; 
 }
 
 
 void load_command_options() {
-    command_options["-H"]="to print this glossary.";
+    command_options["-H"]="Prints this glossary.";
     command_options["-R"]="Enables receiver mode.";
-    command_options["-S <File>"] = "Enables sender mode indicating the file to be sent.";
+    command_options["-S <File>"] = "Enables sender mode, indicating the file to be sent.";
     command_options["--IPv4 <Address>"] = "[param for  -S] Specifies the IPv4 address of the receiver.";
     command_options["--IPv6 <Address>"] = "[param for  -S] Specifies the IPv6 address of the receiver.";
     command_options["-L"]="Lists all avaliable addresses.";
@@ -147,6 +169,7 @@ void load_command_options() {
     command_options["--only-IPv6"]="[param for  -L] List only IPv6 addresses.";
     command_options["-P <Port>"]="Specifies the port to be used.";
     command_options["-K <Password>"]="Specifies a Password.";
+    command_options["-B <Size-in-bytes>"]="Sets the buffer size.";
     command_options["-C"]="Prints the current keeft config.";
 }
 

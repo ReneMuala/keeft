@@ -1,8 +1,5 @@
 /*  KEEFT - TCP/IP FILE TRANSFER TOOL
  *  © Landia (Rene Muala)
- *  
- * Usage:
- * See HowToUse.md
  *
  */
 
@@ -21,7 +18,6 @@
 
 #define keeft_key_len 515
 #define keeft_filename_len 2048
-#define keeft_sock_len 0x50B4
 
 namespace keeft {
     int create_stream_tcpip_socket();
@@ -31,14 +27,14 @@ namespace keeft {
     bool wait_for_client();
     bool verify_password(const char *);
     bool get_file_specs(char *, size_t &);
-    bool receive_file(FILE *, size_t);
+    bool receive_file(FILE *, size_t, size_t);
     ;; void ignore_path_in_filename(char *);
-    ;; size_t get_file_size(FILE*);
+    ;; size_t get_file_size(FILE*, size_t);
     /* client */
     bool connect_to_server();
     bool send_password(const char *);
     bool send_file_specs(const char *, size_t);
-    bool send_file(FILE *);
+    bool send_file(FILE *, size_t, size_t);
     ;;
     bool end();
     std::vector<std::string> get_machine_IPv4_addrs();
