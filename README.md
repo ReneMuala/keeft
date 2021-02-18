@@ -36,11 +36,10 @@ _setting the port (9001) to receive from:_
 ##### -K _Key_ 
 A key (aka password) is used to grant more security at the authentication phase.
 
-_setting a key on receiver_
-
-> keeft -R -K bananas21
-
 _setting a key on sender_
 
 > keeft -S helloworld.txt -K bananas21
 
+_setting a key on receiver_
+
+> keeft -R -K bananas21
