@@ -94,7 +94,7 @@ bool receive_file(FILE*  file, size_t size, size_t buf_size)
 void ignore_path_in_filename(char*filename)
 {
     std::string filename_str = filename;
-    size_t init_pos = filename_str.find_last_of('/');
+    size_t init_pos = filename_str.find_last_of('/')+1;
     init_pos = (init_pos < filename_str.length()) ? init_pos : 0;
     bzero(filename, keeft_filename_len);
     strcpy(filename, filename_str.substr(init_pos, filename_str.length() - init_pos).data());
