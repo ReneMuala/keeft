@@ -7,7 +7,7 @@
 #include "net.hpp"
 
 namespace keeft {
-    static const char version [] = {"0.1.1"};
+    static const char version [] = {"0.1.2"};
     void set_default_key();
     void set_default_port();
     void set_default_address();
